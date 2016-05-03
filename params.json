@@ -1,6 +1,6 @@
 {
   "name": "EQuateJS",
   "tagline": "A web API framework using (E)vents and (Q)ueries to manage application state",
-  "body": "### Welcome to EQuateJS\r\n\r\nEQuateJS is a web API framework using (E)vents and (Q)ueries to manage application state.\r\n\r\nPlease look forward to more updates as the core API will be released soon.",
+  "body": "### Welcome to EQuateJS\r\n\r\nEQuateJS is a web API framework using (E)vents and (Q)ueries to manage application state.\r\n\r\nPlease look forward to more updates as the core API will be released soon.\r\n\r\n***\r\n\r\nFor now, check out these related pages:\r\n- [CQRS Journey](https://msdn.microsoft.com/en-us/library/jj554200.aspx)\r\n- [Flux Application Architecture](https://facebook.github.io/flux/docs/overview.html)\r\n- [Event Sourcing](http://martinfowler.com/eaaDev/EventSourcing.html)",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
