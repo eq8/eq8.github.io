@@ -51,7 +51,7 @@
         data-chapter-title="API"
         data-filepath="api/README.md"
         data-basepath=".."
-        data-revision="Wed May 18 2016 02:58:38 GMT+0000 (UTC)"
+        data-revision="Thu May 19 2016 03:01:34 GMT+0000 (UTC)"
         data-innerlanguage="">
     
 
@@ -80,16 +80,16 @@
             
         </li>
     
-        <li class="chapter " data-level="1" data-path="OVERVIEW.html">
+        <li class="chapter " data-level="1" data-path="guides/index.html">
             
                 
-                    <a href="../OVERVIEW.html">
+                    <a href="../guides/index.html">
                 
                         <i class="fa fa-check"></i>
                         
                             <b>1.</b>
                         
-                        Overview
+                        Guides
                     </a>
             
             
@@ -261,12 +261,18 @@
                     <section class="normal" id="section-">
                     
                         <h1 id="api">API</h1>
-<p><code>var api = require(&apos;eq8js&apos;)</code></p>
-<h2 id="eq8core">eq8-core</h2>
-<p><code>api.trigger(e, callback)</code></p>
-<p><code>api.search(q, uri, callback)</code></p>
-<p><code>api.act(action, context, callback)</code></p>
-<p><code>api.view(query, context, callback)</code></p>
+<pre><code>var Core = require(&apos;eq8-core&apos;)
+var Api = require(&apos;eq8js&apos;)
+</code></pre><h2 id="eq8core">eq8-core</h2>
+<p><code>Core#trigger(e, callback)</code></p>
+<p><code>Core#search(q, uri, callback)</code></p>
+<p><code>Core#register(o, callback)</code></p>
+<p><code>Core#addRegistrar(registrars, callback)</code></p>
+<p><code>Core#setDefaultListener(e, listener, done)</code></p>
+<p><code>Core#listen()</code></p>
+<h2 id="eq8js">eq8js</h2>
+<p><code>Api#act(action, context, callback)</code></p>
+<p><code>Api#view(query, context, callback)</code></p>
 
                     
                     </section>

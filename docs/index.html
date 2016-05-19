@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Introduction | Introduction</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="EquateJS is a web API platform using (E)vents and (Q)ueries to manage application state.">
+        <meta name="description" content="EQuateJS is a web API platform using (E)vents and (Q)ueries to manage application state.">
         <meta name="generator" content="GitBook 2.6.7">
         
         
@@ -37,7 +37,7 @@
         
     
     
-    <link rel="next" href="./OVERVIEW.html" />
+    <link rel="next" href="./guides/index.html" />
     
     
 
@@ -51,7 +51,7 @@
         data-chapter-title="Introduction"
         data-filepath="README.md"
         data-basepath="."
-        data-revision="Wed May 18 2016 02:58:38 GMT+0000 (UTC)"
+        data-revision="Thu May 19 2016 03:01:34 GMT+0000 (UTC)"
         data-innerlanguage="">
     
 
@@ -80,16 +80,16 @@
             
         </li>
     
-        <li class="chapter " data-level="1" data-path="OVERVIEW.html">
+        <li class="chapter " data-level="1" data-path="guides/index.html">
             
                 
-                    <a href="./OVERVIEW.html">
+                    <a href="./guides/index.html">
                 
                         <i class="fa fa-check"></i>
                         
                             <b>1.</b>
                         
-                        Overview
+                        Guides
                     </a>
             
             
@@ -261,93 +261,18 @@
                     <section class="normal" id="section-">
                     
                         <h1 id="introduction">Introduction</h1>
-<p>EquateJS is a web API platform using (E)vents and (Q)ueries to manage application state.</p>
+<p>EQuateJS is a web API platform using (E)vents and (Q)ueries to manage application state.</p>
 <h2 id="quick-start">Quick Start</h2>
-<p>Create the files below, run <code>node index.js</code> and point your browser to <code>http://localhost:8080</code></p>
-<p>Be sure to monitor your browser&apos;s network traffic from its developer tools console and also the console output.</p>
-<h4 id="indexjs">index.js</h4>
-<pre><code>&apos;use strict&apos;;
+<ul>
+<li>Clone the examples repository:</li>
+</ul>
+<pre><code>git clone https://github.com/eq8/eq8-examples.git
+</code></pre><ul>
+<li>Read the <a href="guides/index.html">Guides</a></li>
+<li>Learn the <a href="concepts/index.html">Concepts</a></li>
+<li>Familiarize yourself with the <a href="api/index.html">API</a></li>
+</ul>
 
-var Api = require(&apos;eq8&apos;);
-
-var api = new Api();
-
-var express = require(&apos;express&apos;);
-
-var app = api.express;
-app.use(express.static(&apos;public&apos;));
-api.register({
-    actions: [{
-        name: &apos;hello world&apos;,
-        description: &apos;should echo back inside data&apos;,
-        pattern: {hello: &apos;world&apos;},
-        handler: function(args, ctxt) {
-            console.log(&apos;args:&apos;, args);
-            console.log(&apos;ctxt:&apos;, JSON.stringify(ctxt, null, &apos;\t&apos;));
-            ctxt.res.write(args);
-        }
-    }, {
-        pattern: {error: true},
-        name: &apos;error true&apos;,
-        description: &apos;should echo back inside error&apos;,
-        handler: function(args, ctxt) {
-            console.log(&apos;args:&apos;, args);
-            console.log(&apos;ctxt:&apos;, JSON.stringify(ctxt, null, &apos;\t&apos;));
-            ctxt.res.error(args);
-        }
-    }]
-});
-
-api.listen(8080);
-</code></pre><h4 id="publicindexhtml">public/index.html</h4>
-<pre><code>&lt;!DOCTYPE HTML&gt;
-&lt;html&gt;
-   &lt;head&gt;
-      &lt;script type=&quot;text/javascript&quot;&gt;
-         function demo()
-         {
-            if (&quot;WebSocket&quot; in window)
-            {
-               alert(&quot;WebSocket is supported by your Browser!&quot;);
-
-               // Let us open a web socket
-               var ws = new WebSocket(&quot;ws://localhost:8080/&quot;);
-
-               ws.onopen = function()
-               {
-                  // Web Socket is connected, send data using send()
-                  ws.send(JSON.stringify({hello: &apos;world&apos;}));
-                                    ws.send(JSON.stringify({error: true}));
-                  alert(&quot;Message is sent...&quot;);
-               };
-
-               ws.onmessage = function (evt) 
-               { 
-                  var received_msg = evt.data;
-                  alert(&apos;Check your network traffic in developer tools&apos;);
-               };
-
-               ws.onclose = function()
-               { 
-                  // websocket is closed.
-                  alert(&quot;Connection is closed...&quot;); 
-               };
-            }
-            else
-            {
-               // The browser doesn&apos;t support WebSocket
-               alert(&quot;WebSocket NOT supported by your Browser!&quot;);
-            }
-         }
-      &lt;/script&gt;
-   &lt;/head&gt;
-   &lt;body&gt;
-      &lt;div&gt;
-         &lt;a href=&quot;javascript:demo()&quot;&gt;Run Demo&lt;/a&gt;
-      &lt;/div&gt;
-   &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
                     
                     </section>
                 
@@ -358,7 +283,7 @@ api.listen(8080);
 
         
         
-        <a href="./OVERVIEW.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Overview"><i class="fa fa-angle-right"></i></a>
+        <a href="./guides/index.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Guides"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
