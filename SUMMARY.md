@@ -1,7 +1,7 @@
 # Summary
 
 ## Introduction
-  * [Guides](guides/README.md)
+  * [Overview](OVERVIEW.md)
   * [Concepts](concepts/README.md)
     * [Events](concepts/EVENTS.md)
     * [Queries](concepts/QUERIES.md)
@@ -9,4 +9,5 @@
       * [Actions](concepts/registrars/ACTIONS.md)
       * [Views](concepts/registrars/VIEWS.md)
       * [Services](concepts/registrars/SERVICES.md)
+  * [Guides](guides/README.md)
   * [API](api/README.md)

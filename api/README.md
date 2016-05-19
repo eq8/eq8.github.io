@@ -2,7 +2,7 @@
 
 ```
 var Core = require('eq8-core')
-var Api = require('eq8js')
+var Api = require('eq8')
 ```
 
 ## eq8-core
@@ -19,7 +19,7 @@ var Api = require('eq8js')
 
 `Core#listen()`
 
-## eq8js
+## eq8
 
 `Api#act(action, context, callback)`
 
