@@ -23,107 +23,13 @@
 </code></pre>
 
 <h3>
-<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p>Create the files below, run <code>node index.js</code> and point your browser to <code>http://localhost:8080</code></p>
-
-<p>Be sure to monitor your browser's network traffic from its developer tools console and also the console output.</p>
-
-<h4>
-<a id="indexjs" class="anchor" href="#indexjs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>index.js</h4>
-
-<pre><code>'use strict';
-
-var Api = require('eq8');
-
-var api = new Api();
-
-var express = require('express');
-
-var app = api.express;
-app.use(express.static('public'));
-api.register({
-    actions: [{
-        name: 'hello world',
-        description: 'should echo back inside data',
-        pattern: {hello: 'world'},
-        handler: function(args, ctxt) {
-            console.log('args:', args);
-            console.log('ctxt:', JSON.stringify(ctxt, null, '\t'));
-            ctxt.res.write(args);
-        }
-    }, {
-        pattern: {error: true},
-        name: 'error true',
-        description: 'should echo back inside error',
-        handler: function(args, ctxt) {
-            console.log('args:', args);
-            console.log('ctxt:', JSON.stringify(ctxt, null, '\t'));
-            ctxt.res.error(args);
-        }
-    }]
-});
-
-api.listen(8080);
-</code></pre>
-
-<h4>
-<a id="publicindexhtml" class="anchor" href="#publicindexhtml" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>public/index.html</h4>
-
-<pre><code>&lt;!DOCTYPE HTML&gt;
-&lt;html&gt;
-   &lt;head&gt;
-      &lt;script type="text/javascript"&gt;
-         function demo()
-         {
-            if ("WebSocket" in window)
-            {
-               alert("WebSocket is supported by your Browser!");
-
-               // Let us open a web socket
-               var ws = new WebSocket("ws://localhost:8080/");
-
-               ws.onopen = function()
-               {
-                  // Web Socket is connected, send data using send()
-                  ws.send(JSON.stringify({hello: 'world'}));
-                                    ws.send(JSON.stringify({error: true}));
-                  alert("Message is sent...");
-               };
-
-               ws.onmessage = function (evt) 
-               { 
-                  var received_msg = evt.data;
-                  alert('Check your network traffic in developer tools');
-               };
-
-               ws.onclose = function()
-               { 
-                  // websocket is closed.
-                  alert("Connection is closed..."); 
-               };
-            }
-            else
-            {
-               // The browser doesn't support WebSocket
-               alert("WebSocket NOT supported by your Browser!");
-            }
-         }
-      &lt;/script&gt;
-   &lt;/head&gt;
-   &lt;body&gt;
-      &lt;div&gt;
-         &lt;a href="javascript:demo()"&gt;Run Demo&lt;/a&gt;
-      &lt;/div&gt;
-   &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<h3>
-<a id="reference" class="anchor" href="#reference" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reference</h3>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h3>
 
 <ul>
-<li><a href="./docs">Documentation</a></li>
+<li><a href="./docs/index.html">Introduction</a></li>
+<li><a href="./guides/index.html">Guides</a></li>
+<li><a href="./concepts/index.html">Concepts</a></li>
+<li><a href="./api/index.html">API</a></li>
 </ul>
 
       <footer class="site-footer">
