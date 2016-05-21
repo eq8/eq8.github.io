@@ -1,7 +1,6 @@
 # Summary
 
 ## Introduction
-  * [Overview](OVERVIEW.md)
   * [Concepts](concepts/README.md)
     * [Events](concepts/EVENTS.md)
     * [Queries](concepts/QUERIES.md)
