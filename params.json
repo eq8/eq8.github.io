@@ -1,6 +1,6 @@
 {
   "name": "EQuateJS",
   "tagline": "A web API platform using (E)vents and (Q)ueries to manage application state",
-  "body": "### Installation\r\n\r\n```\r\nnpm install eq8\r\n```\r\n\r\n### Documentation\r\n * [Introduction](./docs/index.html)\r\n * [Guides](./docs/guides/index.html)\r\n * [Concepts](./docs/concepts/index.html)\r\n * [API](./docs/api/index.html)",
+  "body": "### Installation\r\n\r\n```\r\nnpm install --save eq8\r\n```\r\n\r\n## Quick Start\r\n\r\n- Follow the [Guides](./docs/guides/README.md) with the [Examples](https://github.com/eq8/eq8-examples):\r\n\r\n```\r\ngit clone https://github.com/eq8/eq8-examples.git\r\n```\r\n\r\n- Read the [Introduction](./docs/README.md)\r\n- Learn the [Concepts](./docs/concepts/README.md)\r\n- Familiarize yourself with the [API](./docs/api/README.md)",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
