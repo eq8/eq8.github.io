@@ -51,7 +51,7 @@
         data-chapter-title="API"
         data-filepath="api/README.md"
         data-basepath=".."
-        data-revision="Sat May 21 2016 04:10:11 GMT+0000 (UTC)"
+        data-revision="Tue May 31 2016 01:58:12 GMT+0000 (UTC)"
         data-innerlanguage="">
     
 
@@ -263,13 +263,141 @@
                         <h1 id="api">API</h1>
 <pre><code>var Core = require(&apos;eq8-core&apos;)
 var Api = require(&apos;eq8&apos;)
-</code></pre><h2 id="eq8core">eq8-core</h2>
-<p><code>Core#trigger(e, callback)</code></p>
-<p><code>Core#search(q, uri, callback)</code></p>
-<p><code>Core#register(o, callback)</code></p>
-<p><code>Core#addRegistrar(registrars, callback)</code></p>
-<p><code>Core#setDefaultListener(e, listener, done)</code></p>
-<p><code>Core#listen()</code></p>
+</code></pre><h1 id="eq8core">eq8-core</h1>
+<p>EQuateJS Core API Library</p>
+<h3 id="event-trigger">Event: &apos;trigger&apos;</h3>
+<p>Emitted when <code>Core#trigger</code> gets called</p>
+<h3 id="event-search">Event: &apos;search&apos;</h3>
+<p>Emitted when <code>Core#search</code> gets called</p>
+<h3 id="event-listening">Event: &apos;listening&apos;</h3>
+<p>Emitted when the created <code>http.Server</code> object starts listening after a <code>Core#listen</code> method call</p>
+<h3 id="new-coreoptions">new Core([options])</h3>
+<p>Constructor for this EQuateJS Core API library - i.e. <code>eq8-core</code></p>
+<h4 id="parameters">Parameters:</h4>
+<ul>
+<li><code>options</code> is an optional object<ul>
+<li><code>logger</code> is a <code>winston.Logger</code> options object</li>
+<li><code>on</code> is an object with the following properties:<ul>
+<li><code>trigger</code> is an array of <code>trigger</code> event listeners</li>
+<li><code>search</code> is an array of <code>search</code> event listeners</li>
+<li><code>listening</code> is an array of <code>listening</code> event listeners</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="corechainlistenere-listener-done">Core#chainListener(e, listener, done)</h3>
+<p>Similar to <code>EventEmitter.addListener</code> except it removes the previously chained listener and adds it as a <code>prior</code> argument for the newly chained listener.</p>
+<h4 id="for-example">For example:</h4>
+<pre><code>var Core = require(&apos;eq8-core&apos;);
+var api = new Core();
+var async = require(&apos;async&apos;);
+
+function bottomOfStack(e, done) {
+  console.log(&apos;bottomOfStack&apos;, e);
+  done();
+}
+
+function topOfStack(e, done, prior) {
+  console.log(&apos;topOfStack:&apos;, e);
+  prior(e, done);
+}
+
+async.parallel([
+  function(done) {
+    api.chainListener(&apos;trigger&apos;, bottomOfStack, done);
+  },
+  function(done) {
+    api.chainListener(&apos;trigger&apos;, topOfStack, done); 
+  }
+], function parallelDone() {
+  api.trigger(&apos;someEvent&apos;);
+});
+</code></pre><h4 id="result">Result:</h4>
+<pre><code>topOfStack: someEvent
+bottomOfStack: someEvent
+</code></pre><h4 id="parameters">Parameters:</h4>
+<ul>
+<li><code>e</code> is the event name - see list of events above</li>
+<li><code>listener</code> is the handler for the event</li>
+<li><code>done</code> is the callback function that gets called after the listener chaining lifecycle</li>
+</ul>
+<h3 id="coreaddregistrarregistrars-done">Core#addRegistrar(registrars, done)</h3>
+<p>Chains a listener for <code>register:&lt;registryKey&gt;</code> events that occur during a <code>Core#register</code> method call</p>
+<h4 id="for-example">For example:</h4>
+<pre><code>var Core = require(&apos;eq8-core&apos;);
+var api = new Core();
+
+var registrars = {
+  &apos;actions&apos;: function createAction(actions) {
+    console.log(&apos;create actions:&apos;, actions);
+  },
+  &apos;views&apos;: function createView(views) {
+    console.log(&apos;create views:&apos;, views);
+  }
+};
+api.addRegistrar(registrars);
+
+var registries = {
+  &apos;actions&apos;: [
+    {e: &apos;e1&apos;},
+    {e: &apos;e2&apos;}
+  ],
+  &apos;views&apos;: [
+    {q: &apos;q1&apos;},
+    {q: &apos;q2&apos;}
+  ]
+};
+api.register(registries);
+</code></pre><h4 id="result">Result:</h4>
+<pre><code>create actions: [ { e: &apos;e1&apos; }, { e: &apos;e2&apos; } ]
+create views: [ { q: &apos;q1&apos; }, { q: &apos;q2&apos; } ]
+</code></pre><h4 id="parameters">Parameters:</h4>
+<ul>
+<li><code>registrars</code> is an object that takes the form:</li>
+</ul>
+<pre><code>{
+  &apos;registryKey&lt;n&gt;&apos;: function handler(registryInitObj){},
+  ...
+}
+</code></pre><ul>
+<li><code>done</code> is an optional error-first callback function that gets called after the registrar adding lifecycle</li>
+</ul>
+<h3 id="coreregisterregistries-done">Core#register(registries, done)</h3>
+<p>Triggers a <code>register:&lt;registryKey&gt;</code> event for each <code>registryKey&lt;n&gt;</code> in <code>registries</code></p>
+<p><strong>NOTE:</strong> See usage example in <code>Core#addRegister</code></p>
+<h4 id="parameters">Parameters:</h4>
+<ul>
+<li><code>registries</code> is an object that takes the form:</li>
+</ul>
+<pre><code>{
+  registryKey1: registryInitObj1,
+  ...
+}
+</code></pre><ul>
+<li><code>done</code> is an optional error-first callback function that gets called after the registration lifecycle</li>
+</ul>
+<h3 id="coretriggere-done">Core#trigger(e, done)</h3>
+<p>Emits a <code>trigger</code> event and passes the parameters <code>e</code> and <code>done</code> to the event handler</p>
+<h4 id="parameters">Parameters:</h4>
+<ul>
+<li><code>e</code> is an arbitrary object to represent a command event</li>
+<li><code>done</code> is an optional arbitrary callback function but conventionally takes an error-first argument: <code>var done = function(err, ...){ ...}</code></li>
+</ul>
+<h3 id="coresearchq-done">Core#search(q, done)</h3>
+<p>Emits a <code>search</code> event and passes the parameters <code>q</code> and <code>done</code> to the event handler</p>
+<h4 id="parameters">Parameters:</h4>
+<ul>
+<li><code>q</code> is an arbitrary object to represent a query event</li>
+<li><code>done</code> is an arbitrary callback function but conventionally takes an error-first argument: <code>var done = function(err, ...){ ...}</code></li>
+</ul>
+<h3 id="corelistenport-done">Core#listen(port, done)</h3>
+<p>Creates an <code>http.Server</code> object and emits a <code>listening</code> event</p>
+<h4 id="parameters">Parameters:</h4>
+<ul>
+<li><code>port</code> is an integer that the created <code>http.Server</code> object will be listening to</li>
+<li><code>done</code> is a callback function that accepts an <code>http.Server</code> argument: <code>var done = function(httpServer){ ... }</code></li>
+</ul>
 <h2 id="eq8">eq8</h2>
 <p><code>Api#act(action, context, callback)</code></p>
 <p><code>Api#view(query, context, callback)</code></p>
