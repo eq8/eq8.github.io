@@ -22,7 +22,6 @@ With *actions* and *views*, the request message is separated from the technical 
 
 - **actions** are higher level abstractions that allow mapping of user intentions and contexts to events
 - **views** applies the same context mapping for queries
-- **services** TBD
 
 ## References
 

@@ -8,4 +8,3 @@ The core library (`eq8-core`) has three building blocks:
 There are three default registrars that come with the main library (`eq8`):
   * [Actions](./registrars/ACTIONS.md)
   * [Views](./registrars/VIEWS.md)
-  * [Services](./registrars/SERVICES.md)
